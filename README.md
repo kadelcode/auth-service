@@ -69,5 +69,10 @@ The service will be running at ```http://localhost:5000```.
 ---
 
 ## API Endpoints
-| Method | Endpoint | Description | Access |
-| ------ | -------- | ----------- | ------ |
+| Method | Endpoint                    | Description              | Access        |
+| ------ | --------------------------- | ------------------------ | ------------- |
+| POST   | ```/api/vi/auth/register``` | Register a new user      | Public        |
+| POST   | ```/api/vi/auth/login```    | Login & retrieve JWT     | Public        |
+| GET    | ```/api/vi/auth/profile```  | Get current user profile | Authenticated |
+| GET    | ```/api/vi/auth/admin```    | Admin-only route         | Admin Only    |
+| GET    | ```/healthz```              | Health check             | Public        |
