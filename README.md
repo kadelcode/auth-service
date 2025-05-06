@@ -76,3 +76,32 @@ The service will be running at ```http://localhost:5000```.
 | GET    | ```/api/vi/auth/profile```  | Get current user profile | Authenticated |
 | GET    | ```/api/vi/auth/admin```    | Admin-only route         | Admin Only    |
 | GET    | ```/healthz```              | Health check             | Public        |
+
+---
+
+## Running Tests
+```
+npm test
+```
+
+---
+
+## 🐳 Docker Setup
+Build & Run
+```
+docker build -t auth-service .
+docker run -p 5000:5000 --env-file .env auth-service
+```
+
+Or with Docker Compose
+```
+docker-compose up --build
+```
+
+---
+
+## 🔒 Security Best Practices
+- Passwords are hashed using ```bcryptjs```.
+- JWTs include roles & expire after a configurable time.
+- Role-based access is enforced via middleware.
+- Basic protection against common vulnerabilities (e.g., CORS setup, input validation).
