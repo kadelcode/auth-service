@@ -113,6 +113,7 @@ The project includes a Swagger/OpenAPI spec (```swagger.json```) for easy API ex
 
 
 ## 🛠 Project Structure
+```
 auth-service/
 ├── config/
 ├── controllers/
@@ -127,6 +128,7 @@ auth-service/
 ├── .env.example
 ├── README.md
 └── server.js
+```
 
 ---
 
