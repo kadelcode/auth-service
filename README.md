@@ -146,7 +146,7 @@ auth-service/
 ---
 
 ## 👤 Author
-[Kadel]('https://kadel.vercel.app')
+[Kadel](https://kadel.vercel.app/)
 
 ---
 
