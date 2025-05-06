@@ -42,7 +42,7 @@ A robust Node.js microservice handles user registration, login, JWT-based authen
 
 1. Clone the Repo
 ```
-git clone https://github.com/your-username/auth-service.git
+git clone https://github.com/kadelcode/auth-service.git
 cd auth-service
 ```
 
