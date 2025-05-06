@@ -105,3 +105,48 @@ docker-compose up --build
 - JWTs include roles & expire after a configurable time.
 - Role-based access is enforced via middleware.
 - Basic protection against common vulnerabilities (e.g., CORS setup, input validation).
+
+---
+
+## 📄 API Documentation
+The project includes a Swagger/OpenAPI spec (```swagger.json```) for easy API exploration. Use tools like Swagger UI or Postman to test the endpoints.
+
+
+## 🛠 Project Structure
+auth-service/
+├── config/
+├── controllers/
+├── middleware/
+├── models/
+├── routes/
+├── utils/
+├── validators/
+├── tests/
+├── Dockerfile
+├── docker-compose.yml
+├── .env.example
+├── README.md
+└── server.js
+
+---
+
+## 📢 Future Improvements
+- 🔑 OAuth integration (Google, Facebook)
+
+- 🔄 Refresh tokens
+
+- 🔐 Two-factor authentication (2FA)
+
+- 🔗 Password reset via email
+
+- 📊 Admin dashboard
+
+---
+
+## 👤 Author
+[Kadel]('https://kadel.vercel.app')
+
+---
+
+## 📃 License
+This project is licensed under the MIT License.
