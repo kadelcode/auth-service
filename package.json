@@ -1,0 +1,20 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "An Authentication and Authorization Microservice",
+  "homepage": "https://github.com/kadelcode/auth-service#readme",
+  "bugs": {
+    "url": "https://github.com/kadelcode/auth-service/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadelcode/auth-service.git"
+  },
+  "license": "ISC",
+  "author": "Ayodele Kadiri",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
