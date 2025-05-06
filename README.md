@@ -64,8 +64,10 @@ JWT_EXPIRES_IN=1h
 ```
 npm run dev
 ```
-The service will be running at ```http://localhost:5000`.
+The service will be running at ```http://localhost:5000```.
 
 ---
 
 ## API Endpoints
+| Method | Endpoint | Description | Access |
+| ------ | -------- | ----------- | ------ |
