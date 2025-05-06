@@ -35,3 +35,37 @@ A robust Node.js microservice handles user registration, login, JWT-based authen
 - **dotenv** for environment configs
 - **Joi/express-validator** (optional) for input validation
 - **Jest/Supertest** for testing
+
+---
+
+## Getting Started
+
+1. Clone the Repo
+```
+git clone https://github.com/your-username/auth-service.git
+cd auth-service
+```
+
+2. Install Dependencies
+```
+npm install
+```
+
+3. Set Up Environment Variables
+Create a ```.env``` file based on ```.env.example```:
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=1h
+```
+
+4. Run the Service
+```
+npm run dev
+```
+The service will be running at ```http://localhost:5000`.
+
+---
+
+## API Endpoints
