@@ -102,4 +102,5 @@ module.exports = {
     register, // Exporting the Register function to be used in other parts of the application
     login, // Exporting the Login function to be used in other parts of the application
     // Add other functions as needed (e.g., logout, refresh token, etc.)
+    profile, // Exporting the Profile function to be used in other parts of the application
 };
