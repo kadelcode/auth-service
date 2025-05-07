@@ -91,6 +91,11 @@ const profile = async (req, res) => {
         if (!user) { // If no user is found with the given ID
             return res.status(404).json({ message: 'User not found' }); // Sending a 404 Not Found response
         }
+        return res.json(user); // Sending the user data as JSON response
+    } catch (error) { // Catching any errors that occur during the process
+        return res.status(500).json({ message: 'Server error' }); // Sending a 500 Internal Server Error response
+    }
+}
 
 
 module.exports = {
