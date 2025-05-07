@@ -84,6 +84,14 @@ const login = async (req, res) => {
 };
 
 
+// Get user profile
+const profile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password'); // Finding the user by ID from the request
+        if (!user) { // If no user is found with the given ID
+            return res.status(404).json({ message: 'User not found' }); // Sending a 404 Not Found response
+        }
+
 
 module.exports = {
     register, // Exporting the Register function to be used in other parts of the application
