@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken'); // Importing the jsonwebtoken library for creating and verifying JSON Web Tokens
-const bcrypt = require('bcrypt'); // Importing bcrypt for hashing passwords
+const bcrypt = require('bcryptjs'); // Importing bcrypt for hashing passwords
 const User = require('../models/User'); // Importing the User model for database operations
 
 // Register a new user
@@ -97,10 +97,20 @@ const profile = async (req, res) => {
     }
 }
 
+// Logout user
+const logout = async (req, res) => {
+    try {
+        // Invalidate the token or perform any other logout logic here
+        return res.status(200).json({ message: 'Logged out successfully' }); // Sending a 200 OK response
+    } catch (error) { // Catching any errors that occur during the process
+        return res.status(500).json({ message: 'Server error' }); // Sending a 500 Internal Server Error response
+    }
+}
 
 module.exports = {
     register, // Exporting the Register function to be used in other parts of the application
     login, // Exporting the Login function to be used in other parts of the application
     // Add other functions as needed (e.g., logout, refresh token, etc.)
     profile, // Exporting the Profile function to be used in other parts of the application
+    logout, // Exporting the Logout function to be used in other parts of the application
 };
