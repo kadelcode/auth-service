@@ -1,3 +1,7 @@
+/*
+* This middleware function is used to authenticate users based on JWT tokens.
+*/
+
 const authMiddleware = (roles = []) => {
     return (req, res, next) => {
         const authHeader = req.headers.authorization; // Getting the authorization header from the request
@@ -27,3 +31,6 @@ const authMiddleware = (roles = []) => {
         }
     };
 };
+
+module.exports = authMiddleware; // Exporting the authentication middleware function
+// This middleware can be used to protect routes and check user roles
