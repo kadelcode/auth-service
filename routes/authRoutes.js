@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware'); // Importing the
 
 router.post('/register', register); // Route for user registration
 router.post('/login', login); // Route for user login
-router.get('/profile', authMiddleware(), profile); // Route for getting user profile, protected by authentication middleware
+router.get('/profile', authMiddleware(['admin', 'user']), profile); // Route for getting user profile, protected by authentication middleware
 router.get('/admin', authMiddleware('admin'), (req, res) => { // Route for admin access, protected by authentication middleware
     res.status(200).json({ message: 'Welcome Admin' }); // Sending a welcome message for admin access
 } // Sending a 200 OK response with the welcome message

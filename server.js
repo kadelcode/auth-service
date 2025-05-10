@@ -12,7 +12,7 @@ const helmet = require('helmet'); // Importing helmet for securing HTTP headers
 const morgan = require('morgan'); // Importing morgan for logging HTTP requests
 
 const authRoutes = require('./routes/authRoutes'); // Importing authentication routes
-const errorHandler = require('./middleware/errorHandler'); // Importing custom error handling middleware
+// const errorHandler = require('./middleware/errorHandler'); // Importing custom error handling middleware
 
 const app = express(); // Creating an instance of express
 
@@ -30,16 +30,13 @@ app.get('/api/v1/health', (req, res) => {
 });
 
 // Eror handling middleware (must be defined after all routes)
-app.use(errorHandler); // Using custom error handling middleware
+// app.use(errorHandler); // Using custom error handling middleware
 
 const PORT = process.env.PORT || 5000; // Setting the port from environment variables or defaulting to 5000
-const MONGO_URI = process.env.MONGO_URI; // Getting MongoDB URI from environment variables
+// const MONGO_URI = process.env.MONGO_URI; // Getting MongoDB URI from environment variables
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI, { // Connecting to MongoDB using the URI from environment variables
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI) // Connecting to MongoDB using the URI from environment variables
 .then(() => {
     console.log('MongoDB connected'); // Logging success message on successful connection
     app.listen(PORT, () => { // Starting the server on the specified port
