@@ -33,4 +33,18 @@ describe('Authentication Routes', () => {
         expect(res.statusCode).toEqual(201); // Expecting a 201 Created response
         expect(res.body).toHaveProperty('token'); // Expecting the response to have a token property
     });
+
+    // Test case for logging in an existing user
+    it('should login an existing user and return a token', async () => {
+        const res = await request(app)
+            .post('/api/v1/auth/login')
+            .send({
+                email: 'testuser@gmail.com',
+                password: 'testpassword',
+            });
+        expect(res.statusCode).toEqual(200); // Expecting a 200 OK response
+        expect(res.body).toHaveProperty('token'); // Expecting the response to have a token property
+    }); // Test case for logging in an existing user
+
+    
 }); // Starting the test suite for authentication routes
