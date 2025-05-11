@@ -2,11 +2,13 @@ const jwt = require('jsonwebtoken'); // Importing the jsonwebtoken library for c
 const bcrypt = require('bcryptjs'); // Importing bcrypt for hashing passwords
 const User = require('../models/User'); // Importing the User model for database operations
 
+require('dotenv').config(); // Importing dotenv to load environment variables from a .env file
+
 // Register a new user
 const register = async (req, res) => {
-    const { name, email, password } = req.body; // Destructuring the request body to get name, email, and password
+    const { name, username, email, password } = req.body; // Destructuring the request body to get name, email, and password
 
-    if (!name || !email || !password) { // Checking if any of the required fields are missing
+    if (!name || !username || !email || !password) { // Checking if any of the required fields are missing
         return res.status(400).json({ message: 'Please fill all fields' }); // Sending a 400 Bad Request response
     }
 
@@ -19,6 +21,7 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10); // Hashing the password with a salt rounds of 10
         const newUser = await User.create({ // Creating a new user in the database
             name,
+            username,
             email,
             password: hashedPassword, // Storing the hashed password
         });
@@ -35,11 +38,14 @@ const register = async (req, res) => {
             user: {
                 id: newUser._id,
                 name: newUser.name,
+                username: newUser.username,
                 email: newUser.email,
             },
             token, // Sending the JWT token
         });
     } catch (error) { // Catching any errors that occur during the process
+        console.log(req.body); // Logging the request body for debugging purposes
+        console.error(error); // Logging the error for debugging purposes
         return res.status(500).json({ message: 'Server error' }); // Sending a 500 Internal Server Error response
     }
 };
