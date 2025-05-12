@@ -24,12 +24,13 @@ const register = async (req, res) => {
             username,
             email,
             password: hashedPassword, // Storing the hashed password
+            roles: ['user'], // Assigning the default role of 'user'
         });
 
-        await newUser.save(); // Saving the new user to the database
+        // await newUser.save(); // Saving the new user to the database
 
         const token = jwt.sign( // Creating a JWT token for the new user
-            { id: newUser._id }, // Using the user's ID as payload
+            { id: newUser._id, roles: newUser.roles }, // Using the user's ID and roles as payload
             process.env.JWT_SECRET, // Using the secret key from environment variables
             { expiresIn: '30d' } // Setting the token to expire in 30 days
         );
@@ -71,7 +72,7 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign( // Creating a JWT token for the user
-            { id: user._id }, // Using the user's ID as payload
+            { id: user._id, roles: user.roles }, // Using the user's ID and roles as payload
             process.env.JWT_SECRET, // Using the secret key from environment variables
             { expiresIn: '30d' } // Setting the token to expire in 30 days
         );
@@ -93,6 +94,9 @@ const login = async (req, res) => {
 // Get user profile
 const profile = async (req, res) => {
     try {
+        console.log('User ID from token:', req.user.id); // Logging the user ID from the token for debugging
+        console.log('User roles from token:', req.user.roles); // Logging the user roles from the token for debugging
+        
         const user = await User.findById(req.user.id).select('-password'); // Finding the user by ID from the request
         if (!user) { // If no user is found with the given ID
             return res.status(404).json({ message: 'User not found' }); // Sending a 404 Not Found response
