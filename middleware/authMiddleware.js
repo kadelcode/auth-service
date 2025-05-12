@@ -2,6 +2,9 @@
 * This middleware function is used to authenticate users based on JWT tokens.
 */
 
+require('dotenv').config(); // Importing dotenv to load environment variables from a .env file
+const jwt = require('jsonwebtoken'); // Importing jsonwebtoken for JWT token verification
+
 const authMiddleware = (roles = []) => {
     return (req, res, next) => {
         const authHeader = req.headers.authorization; // Getting the authorization header from the request
@@ -20,8 +23,16 @@ const authMiddleware = (roles = []) => {
             const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verifying the token using the secret key
             req.user = decoded; // Attaching the decoded user information to the request object
 
-            if (roles.length && !roles.includes(req.user.role)) { // Checking if the user has the required role
-                return res.status(403).json({ message: 'Forbidden' }); // Sending a 403 Forbidden response
+            console.log('Decoded token:', decoded); // Logging the decoded token for debugging
+            console.log('User roles:', decoded.roles); // Logging the user roles for debugging
+
+            if (roles.length) {
+                const userRoles = Array.isArray(decoded.roles) ? decoded.roles : [decoded.roles]; // Ensuring roles are in array format
+                const hasRole = roles.some(role => userRoles.includes(role));
+
+                if (!hasRole) {
+                    return res.status(403).json({ message: 'Forbidden: Insuffient role' }); // Sending a 403 Forbidden response if the user does not have the required role
+                }
             }
 
             next(); // Proceeding to the next middleware or route handler
