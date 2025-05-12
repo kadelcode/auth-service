@@ -40,11 +40,6 @@ const userSchema = new mongoose.Schema({ // Defining the schema for the User mod
         enum: ['user', 'admin'], // The roles can only be 'user' or 'admin'
         default: ['user'], // Default role is 'user'
     },
-    roles: {
-        type: [String], // The roles field is an array of Strings
-        enum: ['user', 'admin'], // The roles can only be 'user' or 'admin'
-        default: ['user'], // Default role is 'user'
-    }
 }, { timestamps: true }) // Automatically add createdAt and updatedAt timestamps
 
 module.exports = mongoose.model('User', userSchema); // Export the User model based on the schema
