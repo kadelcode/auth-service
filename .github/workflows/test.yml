@@ -22,3 +22,6 @@ jobs:
 
       - name: Run tests
         run: npm test # Run the tests using npm
+
+        env:
+            JWT_SECRET: ${{ secrets.JWT_SECRET }} # Set the JWT_SECRET environment variable from GitHub secrets
