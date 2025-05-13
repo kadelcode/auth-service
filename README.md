@@ -71,11 +71,11 @@ The service will be running at ```http://localhost:5000```.
 ## API Endpoints
 | Method | Endpoint                    | Description              | Access        |
 | ------ | --------------------------- | ------------------------ | ------------- |
-| POST   | ```/api/vi/auth/register``` | Register a new user      | Public        |
-| POST   | ```/api/vi/auth/login```    | Login & retrieve JWT     | Public        |
-| GET    | ```/api/vi/auth/profile```  | Get current user profile | Authenticated |
-| GET    | ```/api/vi/auth/admin```    | Admin-only route         | Admin Only    |
-| GET    | ```/healthz```              | Health check             | Public        |
+| POST   | ```/api/v1/auth/register``` | Register a new user      | Public        |
+| POST   | ```/api/v1/auth/login```    | Login & retrieve JWT     | Public        |
+| GET    | ```/api/v1/auth/profile```  | Get current user profile | Authenticated |
+| GET    | ```/api/v1/auth/admin```    | Admin-only route         | Admin Only    |
+| GET    | ```/api/v1/health```        | Health check             | Public        |
 
 ---
 
