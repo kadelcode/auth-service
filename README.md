@@ -30,7 +30,7 @@ A robust Node.js microservice handles user registration, login, JWT-based authen
 ## Tech Stack
 - **Node.js** + **Express.js**
 - **MongoDB** + **Mongoose**
-- **JWT** for authentivation
+- **JWT** for authentication
 - **bcryptjs** for password hashing
 - **dotenv** for environment configs
 - **Joi/express-validator** (optional) for input validation
