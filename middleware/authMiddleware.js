@@ -28,7 +28,7 @@ const authMiddleware = (roles = []) => {
 
             if (roles.length) {
                 const userRoles = Array.isArray(decoded.roles) ? decoded.roles : [decoded.roles]; // Ensuring roles are in array format
-                const hasRole = roles.some(role => userRoles.includes(role));
+                const hasRole = roles.some(role => userRoles.includes(role)); // Checking if the user has any of the required roles
 
                 if (!hasRole) {
                     return res.status(403).json({ message: 'Forbidden: Insuffient role' }); // Sending a 403 Forbidden response if the user does not have the required role
