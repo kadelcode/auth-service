@@ -57,5 +57,13 @@ describe('Authentication Routes', () => {
         expect(res.body).toHaveProperty('email', 'testuser@gmail.com'); // Expecting the response to have an email property
     }); // Test case for accessing the profile route with a valid token
 
+    it('should not access the profile route without a token', async () => {
+        const res = await request(app)
+            .get('/api/v1/auth/profile'); // No token provided
+
+        expect(res.statusCode).toEqual(401); // Expecting a 401 Unauthorized response
+        expect(res.body).toHaveProperty('message', 'Unauthorized'); // Expecting the response to have an Unauthorized message
+    }); // Test case for accessing the profile route without a token
+
     
 }); // Starting the test suite for authentication routes
