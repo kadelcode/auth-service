@@ -44,7 +44,18 @@ describe('Authentication Routes', () => {
             });
         expect(res.statusCode).toEqual(200); // Expecting a 200 OK response
         expect(res.body).toHaveProperty('token'); // Expecting the response to have a token property
+        token = res.body.token; // Storing the token for later use
     }); // Test case for logging in an existing user
+
+    it('should access the profile route with a valid token', async () => {
+        const res = await request(app)
+            .get('/api/v1/auth/profile')
+            .set('Authorization', `Bearer ${token}`); // Setting the Authorization header with the token
+
+        expect(res.statusCode).toEqual(200); // Expecting a 200 OK response
+        expect(res.body).toHaveProperty('username', 'testuser'); // Expecting the response to have a username property
+        expect(res.body).toHaveProperty('email', 'testuser@gmail.com'); // Expecting the response to have an email property
+    }); // Test case for accessing the profile route with a valid token
 
     
 }); // Starting the test suite for authentication routes
