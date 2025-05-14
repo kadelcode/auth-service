@@ -63,7 +63,7 @@ const login = async (req, res) => {
     try {
         const user = await User.findOne({ email }).select('+password'); // Finding the user by email and including the password field
         if (!user) { // If no user is found with the given email
-            return res.status(400).json({ message: 'Invalid credentials' }); // Sending a 400 Bad Request response
+            return res.status(403).json({ message: 'Invalid credentials' }); // Sending a 400 Bad Request response
         }
 
         const isMatch = await bcrypt.compare(password, user.password); // Comparing the provided password with the hashed password in the database
@@ -96,7 +96,7 @@ const profile = async (req, res) => {
     try {
         console.log('User ID from token:', req.user.id); // Logging the user ID from the token for debugging
         console.log('User roles from token:', req.user.roles); // Logging the user roles from the token for debugging
-        
+
         const user = await User.findById(req.user.id).select('-password'); // Finding the user by ID from the request
         if (!user) { // If no user is found with the given ID
             return res.status(404).json({ message: 'User not found' }); // Sending a 404 Not Found response
