@@ -46,7 +46,6 @@ const register = async (req, res) => {
             user: {
                 id: newUser._id,
                 name: newUser.name,
-                username: newUser.username,
                 email: newUser.email,
             },
             //token, // Sending the JWT token
