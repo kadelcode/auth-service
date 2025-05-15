@@ -1,0 +1,25 @@
+version: '3.8' # Define the version of the Docker Compose file format
+
+services: # Define the services that will be part of this Docker Compose application
+  api:
+    build:
+      context: . # Build context is the current directory
+      dockerfile: Dockerfile # Dockerfile to use for building the image
+    ports:
+      - "5000:5000" # Map port 5000 of the container to port 5000 of the host
+    env_file:
+      - .env # Load environment variables from the .env file
+    depends_on:
+      - mongo # Ensure MongoDB service is started before the API service
+    volumes:
+      - .:/app # Mount the current directory to /app in the container
+
+  mongo:
+    image: mongo:latest # Use the latest MongoDB image from Docker Hub
+    ports:
+      - "27017:27017" # Map port 27017 of the container to port 27017 of the host
+    volumes:
+      - mongo-data:/data/db # Persist MongoDB data in a named volume
+
+volumes:
+  mongo-data: # Define a named volume for MongoDB data persistence

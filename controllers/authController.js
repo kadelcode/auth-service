@@ -118,6 +118,7 @@ const profile = async (req, res) => {
         }
         return res.json(user); // Sending the user data as JSON response
     } catch (error) { // Catching any errors that occur during the process
+        console.error('Profile error:', error)
         return res.status(500).json({ message: 'Server error' }); // Sending a 500 Internal Server Error response
     }
 }
