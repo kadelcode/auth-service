@@ -15,7 +15,10 @@ const cookieParser = require('cookie-parser');
 // Middleware to parse JSON request bodies
 app.use(express.json()); // Using express.json() middleware to parse JSON request bodies
 
-app.use(cors()); // Enabling CORS for all routes
+app.use(cors({
+    origin: 'http://localhost:3000', // Frontend origin
+    credentials: true,
+})); // Enabling CORS for all routes
 app.use(helmet()); // Using helmet to secure HTTP headers
 app.use(morgan('dev')); // Using morgan for logging HTTP requests in 'dev' format
 app.use(express.json()); // Parsing JSON request bodies
