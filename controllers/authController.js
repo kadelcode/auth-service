@@ -6,9 +6,9 @@ require('dotenv').config(); // Importing dotenv to load environment variables fr
 
 // Register a new user
 const register = async (req, res) => {
-    const { name, username, email, password } = req.body; // Destructuring the request body to get name, email, and password
+    const { name, email, password } = req.body; // Destructuring the request body to get name, email, and password
 
-    if (!name || !username || !email || !password) { // Checking if any of the required fields are missing
+    if (!name || !email || !password) { // Checking if any of the required fields are missing
         return res.status(400).json({ message: 'Please fill all fields' }); // Sending a 400 Bad Request response
     }
 
@@ -21,7 +21,6 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10); // Hashing the password with a salt rounds of 10
         const newUser = await User.create({ // Creating a new user in the database
             name,
-            username,
             email,
             password: hashedPassword, // Storing the hashed password
             roles: ['user'], // Assigning the default role of 'user'
@@ -35,6 +34,14 @@ const register = async (req, res) => {
             { expiresIn: '30d' } // Setting the token to expire in 30 days
         );
 
+        // Set token as HttpOnly cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Strict',
+            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        });
+
         return res.status(201).json({ // Sending a 201 Created response with the new user and token
             user: {
                 id: newUser._id,
@@ -42,7 +49,7 @@ const register = async (req, res) => {
                 username: newUser.username,
                 email: newUser.email,
             },
-            token, // Sending the JWT token
+            //token, // Sending the JWT token
         });
     } catch (error) { // Catching any errors that occur during the process
         console.log(req.body); // Logging the request body for debugging purposes
@@ -77,13 +84,21 @@ const login = async (req, res) => {
             { expiresIn: '30d' } // Setting the token to expire in 30 days
         );
 
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Strict',
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+        })
+
         return res.status(200).json({ // Sending a 200 OK response with the user and token
+            message: 'Logged in successfully',
             user: {
                 id: user._id,
                 name: user.name,
                 email: user.email,
             },
-            token, // Sending the JWT token
+            //token, // Sending the JWT token
         });
     } catch (error) { // Catching any errors that occur during the process
         return res.status(500).json({ message: 'Server error' }); // Sending a 500 Internal Server Error response
@@ -110,6 +125,7 @@ const profile = async (req, res) => {
 // Logout user
 const logout = async (req, res) => {
     try {
+        res.clearCookie('token');
         // Invalidate the token or perform any other logout logic here
         return res.status(200).json({ message: 'Logged out successfully' }); // Sending a 200 OK response
     } catch (error) { // Catching any errors that occur during the process
