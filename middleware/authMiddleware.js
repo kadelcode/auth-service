@@ -11,9 +11,9 @@ const authMiddleware = (roles = []) => {
         const token = req.cookies.token;
 
         // Checking if the authorization header is present and starts with 'Bearer '
-        if (!authHeader || !authHeader.startsWith('Bearer ')) { 
+        /*if (!authHeader || !authHeader.startsWith('Bearer ')) { 
             return res.status(401).json({ message: 'Unauthorized' }); // Sending a 401 Unauthorized response
-        }
+        }*/
 
         // const token = authHeader.split(' ')[1]; // Extracting the token from the authorization header
         if (!token) { // If no token is found
