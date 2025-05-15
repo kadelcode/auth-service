@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 app.use(express.json()); // Using express.json() middleware to parse JSON request bodies
 
 app.use(cors({
-    origin: 'https://auth-frontend-sooty.vercel.app/', // Frontend origin
+    origin: 'https://auth-frontend-sooty.vercel.app', // Frontend origin
     credentials: true,
 })); // Enabling CORS for all routes
 app.use(helmet()); // Using helmet to secure HTTP headers
