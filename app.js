@@ -10,6 +10,7 @@ const authRoutes = require('./routes/authRoutes'); // Importing authentication r
 const cors = require('cors'); // Importing cors for enabling Cross-Origin Resource Sharing
 const helmet = require('helmet'); // Importing helmet for securing HTTP headers
 const morgan = require('morgan'); // Importing morgan for logging HTTP requests
+const cookieParser = require('cookie-parser');
 
 // Middleware to parse JSON request bodies
 app.use(express.json()); // Using express.json() middleware to parse JSON request bodies
@@ -18,6 +19,7 @@ app.use(cors()); // Enabling CORS for all routes
 app.use(helmet()); // Using helmet to secure HTTP headers
 app.use(morgan('dev')); // Using morgan for logging HTTP requests in 'dev' format
 app.use(express.json()); // Parsing JSON request bodies
+app.use(cookieParser());
 
 // Routes
 app.use('/api/v1/auth', authRoutes); // Mounting authentication routes under '/api/v1/auth'
