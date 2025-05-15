@@ -8,14 +8,14 @@ const userSchema = new mongoose.Schema({ // Defining the schema for the User mod
         maxlength: 50, // Maximum length of the name is 50 characters
         trim: true, // Trims whitespace from both ends of the string
     },
-    username: {
+    /*username: {
         type: String, // The username field is of type String
         required: true, // This field is required
         unique: true, // The username must be unique across all users
         minlength: 3, // Minimum length of the username is 3 characters
         maxlength: 20, // Maximum length of the username is 20 characters
         trim: true, // Trims whitespace from both ends of the string
-    },
+    },*/
     email: {
         type: String, // The email field is of type String
         required: true, // This field is required
