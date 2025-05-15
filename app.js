@@ -12,11 +12,21 @@ const helmet = require('helmet'); // Importing helmet for securing HTTP headers
 const morgan = require('morgan'); // Importing morgan for logging HTTP requests
 const cookieParser = require('cookie-parser');
 
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://auth-frontend-sooty.vercel.app',
+]
 // Middleware to parse JSON request bodies
 app.use(express.json()); // Using express.json() middleware to parse JSON request bodies
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Frontend origin https://auth-frontend-sooty.vercel.app
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 })); // Enabling CORS for all routes
 app.use(helmet()); // Using helmet to secure HTTP headers
