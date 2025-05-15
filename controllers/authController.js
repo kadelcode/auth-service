@@ -37,8 +37,8 @@ const register = async (req, res) => {
         // Set token as HttpOnly cookie
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'Strict',
+            secure: process.env.NODE_ENV === 'production' ? true : false,
+            sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'LAX',
             maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
 
@@ -86,8 +86,8 @@ const login = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: 'false', //process.env.NODE_ENV === 'production',
-            sameSite: 'LAX',
+            secure: process.env.NODE_ENV === 'production' ? true : false,
+            sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'LAX',
             maxAge: 30 * 24 * 60 * 60 * 1000,
         })
 
