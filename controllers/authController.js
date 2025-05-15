@@ -53,6 +53,7 @@ const register = async (req, res) => {
         });
     } catch (error) { // Catching any errors that occur during the process
         console.log(req.body); // Logging the request body for debugging purposes
+        console.log(error); // Logging the error on the console
         console.error(error); // Logging the error for debugging purposes
         return res.status(500).json({ message: 'Server error' }); // Sending a 500 Internal Server Error response
     }
