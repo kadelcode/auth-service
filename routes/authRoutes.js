@@ -10,7 +10,7 @@ router.get('/profile', authMiddleware([ROLES.USER, ROLES.ADMIN]), profile); // R
 router.get('/admin', authMiddleware([ROLES.ADMIN]), (req, res) => { // Route for admin access, protected by authentication middleware
     res.status(200).json({ message: 'Welcome Admin' }); // Sending a welcome message for admin access
 }) // Sending a 200 OK response with the welcome message
-router.post('/logout', authMiddleware(), logout); // Sending a 200 OK response with the logout message
+router.post('/logout', logout); // Sending a 200 OK response with the logout message
 
 
 module.exports = router; // Exporting the router to be used in other parts of the application
