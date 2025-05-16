@@ -27,7 +27,7 @@ app.use(cors({
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true,
+    credentials: true, // Allow cookies
 })); // Enabling CORS for all routes
 app.use(helmet()); // Using helmet to secure HTTP headers
 app.use(morgan('dev')); // Using morgan for logging HTTP requests in 'dev' format
