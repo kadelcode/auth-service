@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken'); // Importing the jsonwebtoken library for creating and verifying JSON Web Tokens
 const bcrypt = require('bcryptjs'); // Importing bcrypt for hashing passwords
 const User = require('../models/User'); // Importing the User model for database operations
+const { setAuthCookie } = require('../utils/auth');
 
 require('dotenv').config(); // Importing dotenv to load environment variables from a .env file
 
@@ -35,12 +36,7 @@ const register = async (req, res) => {
         );
 
         // Set token as HttpOnly cookie
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production' ? true : false,
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'LAX',
-            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        });
+        setAuthCookie(res, token);
 
         return res.status(201).json({ // Sending a 201 Created response with the new user and token
             user: {
@@ -84,12 +80,7 @@ const login = async (req, res) => {
             { expiresIn: '30d' } // Setting the token to expire in 30 days
         );
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure:  'false',//process.env.NODE_ENV === 'production' ? true : false,
-            sameSite: 'LAX', //process.env.NODE_ENV === 'production' ? 'None' : 'LAX',
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        })
+        setAuthCookie(res, token);
 
         return res.status(200).json({ // Sending a 200 OK response with the user and token
             message: 'Logged in successfully',
