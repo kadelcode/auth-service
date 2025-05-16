@@ -117,7 +117,11 @@ const profile = async (req, res) => {
 // Logout user
 const logout = async (req, res) => {
     try {
-        res.clearCookie('token');
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+        });
         // Invalidate the token or perform any other logout logic here
         return res.status(200).json({ message: 'Logged out successfully' }); // Sending a 200 OK response
     } catch (error) { // Catching any errors that occur during the process
