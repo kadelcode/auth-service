@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken'); // Importing the jsonwebtoken library for c
 const bcrypt = require('bcryptjs'); // Importing bcrypt for hashing passwords
 const User = require('../models/User'); // Importing the User model for database operations
 const { setAuthCookie } = require('../utils/auth');
+const registerSchema = require('../utils/validation');
 
 require('dotenv').config(); // Importing dotenv to load environment variables from a .env file
 
@@ -9,8 +10,10 @@ require('dotenv').config(); // Importing dotenv to load environment variables fr
 const register = async (req, res) => {
     const { name, email, password } = req.body; // Destructuring the request body to get name, email, and password
 
-    if (!name || !email || !password) { // Checking if any of the required fields are missing
-        return res.status(400).json({ message: 'Please fill all fields' }); // Sending a 400 Bad Request response
+    const { error } = registerSchema.validate(req.body)
+
+    if (error) {
+        return res.status(400).json({ message: error.details[0].message });
     }
 
     try {
